@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Student</title>
+</head>
+<body>
+    <h1>Display Student</h1>
+    <form action="/students/{record_id}" method="GET">
+        <label for="record_id">Student ID:</label>
+        <input type="text" id="record_id" name="record_id" required>
+        <br>
+        <input type="submit" value="Get Student">
+    </form>
+    <div id="studentInfo">
+        <!-- Display student information here -->
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+        const studentInfo = document.getElementById('studentInfo');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const recordId = document.getElementById('record_id').value;
+            const response = await fetch(`/students/${recordId}`, { method: 'GET' });
+            const studentData = await response.json();
+
+            if (response.ok) {
+                const studentInfoHtml = `
+                    <h2>Student Information</h2>
+                    <p><strong>ID:</strong> ${studentData.record_id}</p>
+                    <p><strong>First Name:</strong> ${studentData.first_name}</p>
+                    <p><strong>Last Name:</strong> ${studentData.last_name}</p>
+                    <p><strong>GPA:</strong> ${studentData.gpa}</p>
+                    <p><strong>Enrolled:</strong> ${studentData.enrolled ? 'Yes' : 'No'}</p>
+                `;
+                studentInfo.innerHTML = studentInfoHtml;
+            } else {
+                studentInfo.innerHTML = `<p>Error: ${studentData.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

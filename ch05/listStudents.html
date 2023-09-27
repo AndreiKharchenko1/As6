@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List Students</title>
+</head>
+<body>
+    <h1>List Students</h1>
+    <button id="getStudentsButton">Get Students</button>
+    <div id="studentList">
+        <!-- Display student list here -->
+    </div>
+
+    <script>
+        const getStudentsButton = document.getElementById('getStudentsButton');
+        const studentList = document.getElementById('studentList');
+
+        getStudentsButton.addEventListener('click', async () => {
+            const response = await fetch('/students', { method: 'GET' });
+            const studentData = await response.json();
+
+            if (response.ok) {
+                const students = studentData.students;
+                let studentListHtml = '<h2>Student List</h2>';
+                students.forEach(student => {
+                    studentListHtml += `
+                        <p><strong>ID:</strong> ${student.record_id}</p>
+                        <p><strong>First Name:</strong> ${student.first_name}</p>
+                        <p><strong>Last Name:</strong> ${student.last_name}</p>
+                        <p><strong>GPA:</strong> ${student.gpa}</p>
+                        <p><strong>Enrolled:</strong> ${student.enrolled ? 'Yes' : 'No'}</p>
+                        <hr>
+                    `;
+                });
+                studentList.innerHTML = studentListHtml;
+            } else {
+                studentList.innerHTML = `<p>Error: ${studentData.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

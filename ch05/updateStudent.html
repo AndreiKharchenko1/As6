@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Student</title>
+</head>
+<body>
+    <h1>Update Student</h1>
+    <form action="/students/{record_id}" method="PUT">
+        <label for="record_id">Student ID:</label>
+        <input type="text" id="record_id" name="record_id" required>
+        <br>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <br>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <br>
+        <label for="gpa">GPA:</label>
+        <input type="number" id="gpa" name="gpa" step="0.01" required>
+        <br>
+        <label for="enrolled">Enrolled:</label>
+        <input type="checkbox" id="enrolled" name="enrolled">
+        <br>
+        <input type="submit" value="Update Student">
+    </form>
+</body>
+</html>
