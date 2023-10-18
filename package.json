@@ -1,17 +1,27 @@
 {
-  "name": "your-project-name",
+  "name": "app-unique-name",
   "version": "1.0.0",
   "description": "Your project description",
-  "main": "server.js",  // Your entry point file
+  "main": "studentserver.js",  // Your entry point file
   "scripts": {
-    "start": "node server.js"  // A script to start your application
+    "start": "node studentserver.js"  // A script to start your application
   },
   "dependencies": {
-    // Your project's dependencies will be listed here
+       "express": "^4.17.1",
+    "mongoose": "^6.0.1"
   },
   "devDependencies": {
-    // Development dependencies (if any)
+    "express": "^4.17.1",         // A web application framework
+  "body-parser": "^1.19.0",     // Middleware for parsing request bodies
+  "mongoose": "^6.0.1",         // An Object Data Modeling (ODM) library for MongoDB
+  "axios": "^0.24.0",           // A promise-based HTTP client for making API requests
+  "jsonwebtoken": "^8.5.1",     // For working with JSON Web Tokens (JWT)
+  "bcryptjs": "^2.4.3",        // For hashing and salting passwords
+  "cors": "^2.8.5",             // Middleware for enabling Cross-Origin Resource Sharing
+  "dotenv": "^16.2.0",          // Load environment variables from a .env file
+  "helmet": "^6.0.0",           // Adds security headers to HTTP responses
+  "morgan": "^1.10.0"           // HTTP request logger middleware
   },
-  "author": "Your Name",
-  "license": "MIT"  // Your project's license
+  "author": "Andrei Kharchenko",
+  "license": "NA"  // Your project's license
 }
