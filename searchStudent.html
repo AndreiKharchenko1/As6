@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Student</title>
+</head>
+<body>
+    <h1>Search Student</h1>
+    <form>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <br>
+        <button id="searchButton">Search</button>
+    </form>
+    <div id="studentInfo">
+        <!-- Display student information here -->
+    </div>
+
+    <script>
+        const searchButton = document.getElementById('searchButton');
+        const lastNameInput = document.getElementById('lastName');
+        const studentInfo = document.getElementById('studentInfo');
+
+        searchButton.addEventListener('click', async () => {
+            const lastName = lastNameInput.value;
+            const response = await fetch(`/students?lastName=${lastName}`, { method: 'GET' });
+            const studentData = await response.json();
+
+            if (response.ok) {
+                const students = studentData.students;
+                if (students.length > 0) {
+                    const student = students[0]; // Assuming you want to display the first matching student
+                    const studentInfoHtml = `
+                        <h2>Student Information</h2>
+                        <p><strong>ID:</strong> ${student.record_id}</p>
+                        <p><strong>First Name:</strong> ${student.first_name}</p>
+                        <p><strong>Last Name:</strong> ${student.last_name}</p>
+                        <p><strong>GPA:</strong> ${student.gpa}</p>
+                        <p><strong>Enrolled:</strong> ${student.enrolled ? 'Yes' : 'No'}</p>
+                    `;
+                    studentInfo.innerHTML = studentInfoHtml;
+                } else {
+                    studentInfo.innerHTML = '<p>No matching student found.</p>';
+                }
+            } else {
+                studentInfo.innerHTML = `<p>Error: ${studentData.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
